@@ -7,10 +7,12 @@ import com.exagonal.tasks.domain.ports.in.DeleteTaskUseCase;
 import com.exagonal.tasks.domain.ports.in.GetAdditionalTaskInfoUseCase;
 import com.exagonal.tasks.domain.ports.in.RetrieveTaskUseCase;
 import com.exagonal.tasks.domain.ports.in.UpdateTaskUseCase;
+import lombok.RequiredArgsConstructor;
 
 import java.util.List;
 import java.util.Optional;
 
+@RequiredArgsConstructor
 public class TaskService implements CreateTaskUseCase, RetrieveTaskUseCase, UpdateTaskUseCase, DeleteTaskUseCase, GetAdditionalTaskInfoUseCase {
 
     private final CreateTaskUseCase createTaskUseCase;
@@ -18,16 +20,6 @@ public class TaskService implements CreateTaskUseCase, RetrieveTaskUseCase, Upda
     private final UpdateTaskUseCase updateTaskUseCase;
     private final DeleteTaskUseCase deleteTaskUseCase;
     private final GetAdditionalTaskInfoUseCase getAdditionalTaskInfoUseCase;
-
-    public TaskService(CreateTaskUseCase createTaskUseCase, RetrieveTaskUseCase retrieveTaskUseCase,
-                       UpdateTaskUseCase updateTaskUseCase, DeleteTaskUseCase deleteTaskUseCase,
-                       GetAdditionalTaskInfoUseCase getAdditionalTaskInfoUseCase) {
-        this.createTaskUseCase = createTaskUseCase;
-        this.retrieveTaskUseCase = retrieveTaskUseCase;
-        this.updateTaskUseCase = updateTaskUseCase;
-        this.deleteTaskUseCase = deleteTaskUseCase;
-        this.getAdditionalTaskInfoUseCase = getAdditionalTaskInfoUseCase;
-    }
 
     @Override
     public Task createTask(Task task) {

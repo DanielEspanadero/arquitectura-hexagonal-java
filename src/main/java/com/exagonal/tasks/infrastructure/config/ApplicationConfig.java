@@ -5,10 +5,12 @@ import com.exagonal.tasks.application.usecases.*;
 import com.exagonal.tasks.domain.ports.in.GetAdditionalTaskInfoUseCase;
 import com.exagonal.tasks.domain.ports.out.TaskRepositoryPort;
 import com.exagonal.tasks.domain.ports.out.ExternalServicePort;
-import com.exagonal.tasks.infrastructure.adapters.ExternalServiceAdapter;
-import com.exagonal.tasks.infrastructure.repositories.JpaTaskRepositoryAdapter;
+import com.exagonal.tasks.infrastructure.adapters.out.externalservices.ExternalServiceAdapter;
+import com.exagonal.tasks.infrastructure.adapters.out.database.JpaTaskRepositoryAdapter;
+import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.client.RestTemplate;
 
 @Configuration
 public class ApplicationConfig {
@@ -35,7 +37,12 @@ public class ApplicationConfig {
     }
 
     @Bean
-    public ExternalServicePort externalServicePort() {
-        return new ExternalServiceAdapter();
+    public ExternalServicePort externalServicePort(RestTemplate restTemplate) {
+        return new ExternalServiceAdapter(restTemplate);
+    }
+
+    @Bean
+    public RestTemplate createInstanceRestTemplate(RestTemplateBuilder restTemplateBuilder) {
+        return restTemplateBuilder.build();
     }
 }

@@ -1,19 +1,17 @@
-package com.exagonal.tasks.infrastructure.adapters;
+package com.exagonal.tasks.infrastructure.adapters.out.externalservices;
 
 import com.exagonal.tasks.domain.model.AdditionalTaskInfo;
 import com.exagonal.tasks.domain.ports.out.ExternalServicePort;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
 @Component
+@RequiredArgsConstructor
 public class ExternalServiceAdapter implements ExternalServicePort {
 
     private final RestTemplate restTemplate;
-
-    public ExternalServiceAdapter() {
-        restTemplate = new RestTemplate();
-    }
 
     @Override
     public AdditionalTaskInfo getAdditionalTaskInfo(Long taskId) {
